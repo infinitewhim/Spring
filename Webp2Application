@@ -1,0 +1,61 @@
+package com.hn;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+//@ComponentScan
+public class Webp2Application {
+	
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Webp2Application.class, args);
+		AnnotationConfigApplicationContext context= new AnnotationConfigApplicationContext(Webp2Application.class);
+		//context.refresh();
+		B b1= context.getBean(B.class);
+		b1.go();
+		
+	}
+}
+
+
+
+
+@Component
+class A {
+	String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+}
+
+@Component
+class B {
+	@Autowired
+	public A a2;
+	
+	public void go() {
+		a2.setName("mapi");
+		System.out.println(a2.getName());
+	}
+	
+}
